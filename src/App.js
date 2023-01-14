@@ -126,12 +126,11 @@ function App() {
               <Route path='/my-profile' element={ <AccountInformation /> } />
               <Route path={`/profile/${user.user_id}/visualizations`} element={<AllUserVisualizations user={user}/>} />
               <Route path='/submit-playlist' element={<PlaylistSubmit /> } />
-              <Route path={"/visualization-generator/:playlist_id"} element ={<><GenrePercentageVisualizer loggedIn={loggedIn}
-                                                                                                            user={user}/>
-                                                                              <GenreMostCommonColors/></>}
+              <Route path={"/visualization-generator/:playlist_id"} element ={[<GenrePercentageVisualizer loggedIn={loggedIn}
+                                                                                                            user={user}/>,
+                                                                              <GenreMostCommonColors/>]}
               />
-              <Route path='/browse-visualizations' element ={<><BrowseVisualizations />
-                                                                <BrowseUsers/></>}
+              <Route path='/browse-visualizations' element ={[<BrowseVisualizations />,<BrowseUsers/>]}
               />
               <Route path='/log-out' element={<Navigate to='/' />} />
           </Routes>
