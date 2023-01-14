@@ -63,7 +63,6 @@ def get_all_playlists():
     return [playlist for playlist in all_playlists]
 
 
-
 def create_track(track_title, track_artist, track_image, track_image_color):
     """Create a track."""
 

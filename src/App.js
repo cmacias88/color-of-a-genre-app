@@ -4,6 +4,7 @@ import About from './About.js';
 import AccountInformation from './AccountInformation.js';
 import AllUserVisualizations from './AllUserVisualizations.js';
 import BrowseVisualizations from './BrowseVisualizations.js';
+import BrowseUsers from './BrowseUsers.js';
 import GenreMostCommonColors from './GenreMostCommonColors.js';
 import GenrePercentageVisualizer from './GenrePercentageVisualizer.js';
 import Home from './Home.js';
@@ -126,10 +127,12 @@ function App() {
               <Route path={`/profile/${user.user_id}/visualizations`} element={<AllUserVisualizations user={user}/>} />
               <Route path='/submit-playlist' element={<PlaylistSubmit /> } />
               <Route path={"/visualization-generator/:playlist_id"} element ={<><GenrePercentageVisualizer loggedIn={loggedIn}
-                                                                                                              user={user}/>
+                                                                                                            user={user}/>
                                                                               <GenreMostCommonColors/></>}
               />
-              <Route path='/browse-visualizations' element={<BrowseVisualizations /> } />
+              <Route path='/browse-visualizations' element ={<><BrowseVisualizations />
+                                                                <BrowseUsers/></>}
+              />
               <Route path='/log-out' element={<Navigate to='/' />} />
           </Routes>
       </BrowserRouter>

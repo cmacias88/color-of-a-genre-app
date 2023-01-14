@@ -281,7 +281,13 @@ def get_all_users():
 
     all_users = crud.get_all_users()
 
-    return jsonify({"all_users": all_users})
+    user_list = []
+
+    for user in all_users:
+        user_list.append({'user_id': user.user_id, 
+                        'username':user.username})
+
+    return jsonify(user_list)
 
 
 @app.route('/api/all-playlists')
@@ -290,7 +296,13 @@ def get_all_playlists():
 
     all_playlists = crud.get_all_playlists()
 
-    return jsonify({"all_playlists": all_playlists})
+    playlist_list = []
+
+    for playlist in all_playlists:
+        playlist_list.append({'playlist_id': playlist.playlist_id, 
+                                'playlist_name': playlist.playlist_name})
+
+    return jsonify(playlist_list)
 
 
 @app.route('/api/browse-visualizations')
