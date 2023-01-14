@@ -58,7 +58,7 @@ for genre_name in genre_list:
     model.db.session.add(genre)
 
 
-with open('public/playlists.json') as f:
+with open('data/playlists.json') as f:
     playlist_data = json.loads(f.read())
 
 playlists_in_db = []
