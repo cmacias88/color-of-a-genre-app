@@ -37,7 +37,7 @@ function BrowseVisualizations() {
   }
 
     return (
-        <div className="App">
+        <div>
             <h1>Browse Visualizations</h1><br /><br />
             Search: <input
             style={{ marginLeft: 5 }}

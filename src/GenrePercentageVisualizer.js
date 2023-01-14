@@ -24,7 +24,7 @@ function GenrePercentageVisualizer() {
             for(const genreinfo of res){
                 genreNames.push(genreinfo.genre);
                 genrePercentages.push(parseFloat(genreinfo.genre.percentage));
-                }
+            }
         });
 
     const data = {

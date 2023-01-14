@@ -20,7 +20,7 @@ function GenreMostCommonColors() {
 
     const renderCard = (card, index) => {
         return (
-          <Card style={{ backgroundColor: `${card.most_common_color}` }} key={index} className="box">
+          <Card style={{ backgroundColor: card.most_common_color }} key={index} className="box">
             <Card.Body>
               <Card.Title>{card.genre_name}</Card.Title>
               <Card.Text>For this playlist, {card.genre_name} is {card.most_common_color}</Card.Text>
