@@ -13,7 +13,7 @@ import os, urllib.request, colorsys
 auth_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="../build", static_url_path="/")
 app.secret_key = 'beholder'
 
 SPOTIPY_ID = os.environ["SPOTIPY_CLIENT_ID"]
@@ -326,6 +326,20 @@ def browse_visualizations():
             return jsonify({'error': "There is no visualization with that playlist name."})
 
 
+# production site
+@app.route("/", defaults={"path": ""})
+
+
+@app.route("/<path:path>")
+def index(path):
+    return app.send_static_file("index.html")
+
+
+@app.errorhandler(404)
+def not_found(_error):
+    return app.send_static_file("index.html")
+
+
 if __name__ == "__main__":
     connect_to_db(app)
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0", port=5001)
