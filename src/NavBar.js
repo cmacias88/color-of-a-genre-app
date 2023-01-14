@@ -50,6 +50,12 @@ function NavBar({loggedIn, handleLogout, user}) {
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                     <Nav>
+                        <Nav.Link href="/">
+                            Home
+                        </Nav.Link>
+                        <Nav.Link href="/about">
+                            About
+                        </Nav.Link>
                         <Nav.Link href="/sign-up">
                             Sign Up
                         </Nav.Link>

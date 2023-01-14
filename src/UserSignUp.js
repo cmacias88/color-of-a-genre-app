@@ -3,12 +3,10 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import Row from "react-bootstrap/Row";
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 function UserSignUp() {
-
-    const navigate = useNavigate();
 
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");

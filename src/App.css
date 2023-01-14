@@ -48,11 +48,6 @@ h1 {
       background-clip: text; 
   -webkit-text-fill-color: transparent; 
       color: transparent;
-  text-shadow:
-      1px  1px 2px black,
-      1px -1px 2px black,
-      -1px  1px 2px black,
-      -1px -1px 2px black;
   
   animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
 
@@ -84,4 +79,20 @@ h1 {
       100% {
           background-size: 650%;
       }
+}
+
+body {
+    background-image: radial-gradient( circle farthest-corner at 10% 20%, 
+        rgba(222,168,248,1) 0%, 
+        rgba(168,222,258,1) 21.9%, 
+        rgba(189,250,205,1) 35.6%, 
+        rgba(243,250,189,1) 53.9%, 
+        rgba(250,227,189,1) 66.8%, 
+        rgba(248,172,171,1) 95%, 
+        rgba(254,170,212,1) 99.9% );
+    font-family: 'Titan One';
+    text-align:center;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }

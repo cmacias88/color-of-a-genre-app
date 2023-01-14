@@ -1,7 +1,7 @@
 """Color of a Genre server"""
 
 from flask import Flask, session, request, jsonify, flash, redirect
-from model import User, db, connect_to_db
+from model import db, connect_to_db
 import crud
 import json
 import spotipy
@@ -70,7 +70,7 @@ def check_user_login():
         return jsonify({'error': "User does not exist. Please create an account or verify your information is correct."})
 
 
-@app.route("/api/log-out", methods=['POST'])
+@app.route("api/log-out", methods=['POST'])
 def user_logout():
     """Logging out the user."""
     

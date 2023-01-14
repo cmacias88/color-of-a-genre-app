@@ -25,7 +25,8 @@ const About = () => {
             And don't forget to save the customized link to share with your friends!
 
             Keep in mind that while an account isn't required, it will make it easier to keep track of the visualizations you create through your profile. 
-
+        </p>
+        <p>
             Have fun!
         </p>
       </>

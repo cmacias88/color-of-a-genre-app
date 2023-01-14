@@ -24,45 +24,46 @@ function App() {
   let [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem("loggedIn")));
 
   let handleLogIn = async (evt) => {
-      evt.preventDefault();
+    evt.preventDefault();
 
-      let userExists = await fetch("/api/log-in", {
-          method: "POST",
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
+    let userExists = await fetch("/api/log-in", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: user.username,
+            password: user.password
+        }),
+    });
+
+    if(userExists.status===200){
+      fetch("/api/log-in", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-              username: user.username,
-              password: user.password
+        body: JSON.stringify({
+          username: user.username,
+          password: user.password
           }),
-      });
+      })
+        .then((response) => response.json())
+        .then((data) => setUser({user_id: data.user_id,
+                                fname: data.fname,
+                                lname: data.lname,
+                                username: data.username,
+                                password: data.password
+          }
+        ));
+        setLoggedIn(true);
+        localStorage.setItem("loggedIn", true);
 
-      if(userExists.status===200){
-          let foundUser = await fetch("/api/log-in", {
-              method: "POST",
-              headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                  username: user.username,
-                  password: user.password
-              }),
-          })
-          .then((response) => response.json())
-          .then((data) => setUser({user_id: data.user_id,
-                                  fname: data.fname,
-                                  lname: data.lname,
-                                  username: data.username,
-                                  password: data.password
-          }));
-          setLoggedIn(true);
-          localStorage.setItem("loggedIn", true);
-
-      } else if (userExists.status===401){
-          alert(userExists.statusText);
-      }
+    } else if (userExists.status===401){
+        alert(userExists.statusText);
+    }
   };
 
 
@@ -76,26 +77,17 @@ function App() {
 
   Promise.all([handleLogIn, setSession()]);
 
-  let handleLogout = async (evt) => {
-      evt.preventDefault();
-      setLoggedIn(false);
-      localStorage.setItem("isLoggedIn", false);
-      setUser({user_id: "",
-              fname:"",
-              lname:"",
-              username:"",
-              password:""});
-      
-      let removeUser = await fetch("/api/log-out", {
-          method: "POST",
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-              },
-          body: JSON.stringify({
-              username: user.username
-          }),
-      });
+  let handleLogOut = async (evt) => {
+    evt.preventDefault();
+    setLoggedIn(false);
+    localStorage.setItem("isLoggedIn", false);
+    setUser({user_id: "",
+            fname:"",
+            lname:"",
+            username:"",
+            password:""});
+            setUser({});
+    localStorage.removeItem('user');
   };
 
   useEffect(() => {
@@ -110,7 +102,7 @@ function App() {
   return (
       <BrowserRouter>
           <NavBar loggedIn={loggedIn} 
-                  handleLogout={handleLogout}
+                  handleLogOut={handleLogOut}
                   user={user} 
           />
           <Routes>
