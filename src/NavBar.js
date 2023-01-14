@@ -7,7 +7,7 @@ function NavBar({loggedIn, handleLogout, user}) {
     
     if (loggedIn){
         return (
-            <Navbar sticky="top">
+            <Navbar class="navbar" sticky="top">
                 <Container fluid>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
@@ -45,7 +45,7 @@ function NavBar({loggedIn, handleLogout, user}) {
         );
     } else {
         return (
-            <Navbar sticky="top">
+            <Navbar class="navbar" sticky="top">
                 <Container fluid>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">

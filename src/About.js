@@ -10,7 +10,7 @@ const About = () => {
             This site was inspired by personalized visualization generators like Spotify Wrapped!
         </p>
         <p>
-            In order to begin creating your visualization, use a valid and <strong>public</strong> Spotify playlist link, URI, or ID. 
+            In order to begin creating your visualization, use a valid and <em>public</em> Spotify playlist link, URI, or ID. 
             Here are some examples of each:
                 <li>Spotify Playlist Link: https://open.spotify.com/playlist/7fiod3XXqprAJkisV5vfqF?si=51d4ed7684c248b6</li>
                 <li>Spotify Playlist URI: spotify:playlist:7fiod3XXqprAJkisV5vfqF</li> 

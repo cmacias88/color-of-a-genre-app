@@ -57,21 +57,22 @@ function BrowseVisualizations() {
         
     return(
         <div>
-        <Form className="forms">
-            <Row className="mb-3">
-                <Form.Group className="mb-1" controlId="formUserSearch">
-                    <Form.Label name="user_search">User Search</Form.Label>
-                    <Form.Control type="text" placeholder="Search By Username:" onChange={(evt) => handleUserSearch(evt.target.value)} />
-                    <Form.Control.Feedback type="invalid">
-                        Please provide a valid first name.
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group className="mb-1" controlId="formPlaylistSearch">
-                    <Form.Label name="playlist_search">Playlist Search</Form.Label>
-                    <Form.Control type="text" placeholder="Search By Playlist Name:" onChange={(evt) => handlePlaylistSearch(evt.target.value)} />
-                </Form.Group>
-            </Row>
-            </Form>
+            <h1>Browse Our Visualization and User Databases</h1>
+            <Form className="forms">
+                <Row className="mb-3">
+                    <Form.Group className="mb-1" controlId="formUserSearch">
+                        <Form.Label name="user_search">User Search</Form.Label>
+                        <Form.Control type="text" placeholder="Search By Username:" onChange={(evt) => handleUserSearch(evt.target.value)} />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a valid first name.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group className="mb-1" controlId="formPlaylistSearch">
+                        <Form.Label name="playlist_search">Playlist Search</Form.Label>
+                        <Form.Control type="text" placeholder="Search By Playlist Name:" onChange={(evt) => handlePlaylistSearch(evt.target.value)} />
+                    </Form.Group>
+                </Row>
+                </Form>
             <div>
                 {filteredUserData.map((value, index)=>{
                     return(

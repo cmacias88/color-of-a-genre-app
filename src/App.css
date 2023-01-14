@@ -1,84 +1,68 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .forms {
-  display: block;
-  margin: auto;
-  text-align: center;
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 40px
 }
 
 h1 {
-  font-size: 1 rem;
-  margin: auto;
-  text-align:center;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.spectrum-background {
-  background:
-      linear-gradient(red, transparent),
-      linear-gradient(to top left, lime, transparent),
-      linear-gradient(to top right, blue, transparent);
-  background-blend-mode: screen;
-}
-
-.gradient-text {
-  background-color: #CA4246;
+    background-color: #021858;
   
-  background-image: linear-gradient(
-      45deg,
-      #CA4246 16.666%, 
-      #E16541 16.666%, 
-      #E16541 33.333%, 
-      #F18F43 33.333%, 
-      #F18F43 50%, 
-      #8B9862 50%, 
-      #8B9862 66.666%, 
-      #476098 66.666%, 
-      #476098 83.333%, 
-      #A7489B 83.333%);
+    background-image: linear-gradient(
+        45deg,
+        #CA4246 16.666%, 
+        #E16541 16.666%, 
+        #E16541 33.333%, 
+        #F18F43 33.333%, 
+        #F18F43 50%, 
+        #8B9862 50%, 
+        #8B9862 66.666%, 
+        #476098 66.666%, 
+        #476098 83.333%, 
+        #A7489B 83.333%);
   
-  background-size: 100%;
-  background-repeat: repeat;
+    background-size: 100%;
+    background-repeat: repeat;
+    padding: 40px;
 
-  -webkit-background-clip: text;
-      background-clip: text; 
-  -webkit-text-fill-color: transparent; 
-      color: transparent;
+    -webkit-background-clip: text;
+        background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+        color: transparent;
   
-  animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
-
+    animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
 }
 
-  .gradient-text:hover{
-      animation: rainbow-text-simple-animation 0.5s ease-in forwards;
+h1:hover{
+    animation: rainbow-text-simple-animation 0.5s ease-in forwards;
 }
 
-  @keyframes rainbow-text-simple-animation-rev {
-      0% {
-          background-size: 650%;
-      }
-      40% {
-          background-size: 650%;
-      }
-      100% {
-          background-size: 100%;
-      }
-  }
+    @keyframes rainbow-text-simple-animation-rev {
+        0% {
+            background-size: 650%;
+        }
+        40% {
+            background-size: 650%;
+        }
+        100% {
+        background-size: 100%;
+        }
+    }
 
   @keyframes rainbow-text-simple-animation {
-      0% {
-          background-size: 100%;
+    0% {
+        background-size: 100%;
+    }
+    80% {
+        background-size: 650%;
       }
-      80% {
-          background-size: 650%;
-      }
-      100% {
-          background-size: 650%;
-      }
+    100% {
+        background-size: 650%;
+    };
 }
 
 body {
@@ -90,9 +74,111 @@ body {
         rgba(250,227,189,1) 66.8%, 
         rgba(248,172,171,1) 95%, 
         rgba(254,170,212,1) 99.9% );
+    background-size: cover;
+    background-repeat: repeat;
     font-family: 'Titan One';
     text-align:center;
     align-items: center;
     justify-content: center;
     padding: 20px;
+}
+
+.navbar {
+    background-color: white;
+    text-align: center;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.navbar a {
+    float: left;
+    color: rgba(77, 12, 77, 0.703);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+  
+.navbar a:hover {
+    background-color: black;
+    color: white;
+}
+  
+.navbar a.split {
+    float: right;
+    background-color: #04AA6D;
+    color: black;
+}
+
+em {
+    color: lightseagreen
+}
+
+button {
+    align-items: center;
+    background-color: #fee6e3;
+    border: 2px solid #111;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #111;
+    cursor: pointer;
+    display: flex;
+    font-family: 'Titan One';
+    font-size: 16px;
+    height: 48px;
+    justify-content: center;
+    line-height: 24px;
+    margin: auto;
+    max-width: 100%;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+button:after {
+    background-color: #111;
+    border-radius: 8px;
+    content: "";
+    display: block;
+    height: 48px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    top: -2px;
+    transform: translate(8px, 8px);
+    transition: transform .2s ease-out;
+    z-index: -1;
+    padding: 100 px;
+    margin: auto;
+}
+
+button:hover:after {
+    transform: translate(0, 0);
+}
+
+button:active {
+    background-color: #ffdeda;
+    outline: 0;
+}
+
+button:hover {
+    outline: 0;
+}
+
+@media (min-width: 768px) {
+    button {
+        padding: 0 40px;
+    }
+}
+
+.redirect-login {
+    padding: 40px
+}
+
+.redirect-signup {
+    padding: 40px
 }

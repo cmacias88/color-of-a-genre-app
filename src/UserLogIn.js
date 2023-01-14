@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import Row from "react-bootstrap/Row";
 import { Link } from 'react-router-dom';
@@ -17,6 +16,7 @@ function UserLogIn({handleLogIn, setUsername, setPassword}) {
 
     return(
         <div>
+            <h1>Log In To Your Account</h1>
             {/* <Form noValidate validated={validated} onSubmit={handleLogIn} className="forms"> */}
             <Form onSubmit={handleLogIn} className="forms">
                 <Row className="mb-3">
@@ -40,13 +40,13 @@ function UserLogIn({handleLogIn, setUsername, setPassword}) {
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Row>
-                <Button variant="primary" type="submit">
+                <button type="submit">
                     Submit
-                </Button>
+                </button>
             </Form>
-            <p>
+            <span class='redirect-signup'>
                 <Link to="/sign-up">Don't have an account?</Link>
-            </p>
+            </span>
         </div>
     )
 };
