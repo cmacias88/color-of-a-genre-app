@@ -1,18 +1,15 @@
 import { useState } from "react";
 import Form from 'react-bootstrap/Form';
-import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
-import { Navigate } from 'react-router'
 
 
 function PlaylistSubmit() {
 
     let [playlist, setPlaylist] = useState('');
 
-    let handlePlaylistSubmit = async (evt) => {
-        evt.preventDefault();
-        await fetch("/api/submit-playlist", {
-            method: "POST",
+    let handlePlaylistSubmit = 
+        fetch("/api/submit-playlist", {
+        method: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -21,16 +18,16 @@ function PlaylistSubmit() {
                 playlist: "Valid", 
             })
         })
-            .then((response) => response.json())
+        .then((response) => response.json())
             .then((data) => {
                 console.log('Success:', data);
-                // return <Navigate to={`/visualization-generator/${data.playlist_id}`}/>
             })
-    }
 
     return(
         <div>
-            <h1>Submit Your Playlist</h1>
+            <h1>
+                Submit Your Playlist
+            </h1>
             <Form onSubmit={handlePlaylistSubmit} className="forms">
                 <Form.Group className="mb-1" controlId="formPlaylistLink">
                     <Form.Label name="playlist">Playlist Link</Form.Label>

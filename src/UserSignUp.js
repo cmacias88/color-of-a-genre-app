@@ -1,13 +1,10 @@
 import { useState } from "react";
 import Form from 'react-bootstrap/Form';
-import Alert from 'react-bootstrap/Alert';
 import Row from "react-bootstrap/Row";
 import { Link } from 'react-router-dom';
 
 
 function UserSignUp({handleSignIn, setFname, setLname, setUsername, setPassword}) {
-
-    const [validated, setValidated] = useState(false);
 
     const [data, setData] = useState({
         password: "",
@@ -17,7 +14,7 @@ function UserSignUp({handleSignIn, setFname, setLname, setUsername, setPassword}
     return(
         <div>
             <h1>Make Your Account</h1>
-            <Form noValidate validated={validated} onSubmit={handleSignIn} className="forms">
+            <Form onSubmit={handleSignIn} className="forms">
                 <Row className="mb-3">
                     <Form.Group className="mb-1" controlId="formFname">
                         <Form.Label name="fname">First Name</Form.Label>

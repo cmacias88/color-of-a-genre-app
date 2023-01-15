@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useParams } from 'react-router-dom';
-import Card from "react-bootstrap/Card";
 import randomColor from "randomcolor"
   
 
@@ -19,25 +18,26 @@ function GenrePercentageVisualizer() {
 
     const {playlist_id} = useParams();
 
-    const playlistVisualizationData = fetch(`/api/visualization-generator/${playlist_id}`)
+    const playlistVisualizationData = 
+        fetch(`/api/visualization-generator/${playlist_id}`)
         .then(response => response.json())
         .then(res => {
             console.log(res.playlist_genres)
             for (const genreinfo of res.playlist_genres){
                 genreNames.push(JSON.stringify(genreinfo.genre_name));
                 genrePercentages.push(parseFloat(JSON.stringify(genreinfo.percentage)))
-                genreColors.push({"genre_name": JSON.stringify(genreinfo.genre_name),
-                                "most_common_color": JSON.stringify(genreinfo.most_common_color)});
+                genreColors.push(JSON.stringify(genreinfo.most_common_color));
             }
             console.log(genreNames)
             console.log(genrePercentages)
-        });
+            console.log(genreColors)
+    });
 
     const data = {
         labels: genreNames,
         datasets: [
             {
-                label: 'Genre Percentages',
+                label: 'Genre Percentage',
                 data: genrePercentages,
                 borderColor: color,
                 backgroundColor: genreColors,
@@ -83,7 +83,7 @@ function GenrePercentageVisualizer() {
 
     return (
         <>
-        <div style={{width: "50%", height:"50%", position: "relative"}}>
+        <div>
             <Doughnut data={data} options={options} />
         </div>
         <div class="card-deck">

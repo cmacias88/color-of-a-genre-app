@@ -51,13 +51,13 @@ function App() {
           }),
       })
         .then((response) => response.json())
-        .then((data) => setUser({user_id: data.user_id,
-                                fname: data.fname,
-                                lname: data.lname,
-                                username: data.username,
-                                password: data.password
-          }
-        ));
+        .then(data => {
+          setUser({user_id: data.user_id,
+                    fname: data.fname,
+                    lname: data.lname,
+                    username: data.username,
+                    password: data.password})
+        });
       localStorage.setItem("loggedIn", true);
 
     } else if (userExists.status===401){
@@ -65,8 +65,8 @@ function App() {
     }
   };
 
-  const handleSignIn = async (evt) => {
-    let newUser = await fetch('/api/sign-up', { 
+  const handleSignIn = (evt) => {
+    let newUser = fetch('/api/sign-up', { 
         method: "POST",
         headers: { 
             'Accept': 'application/json',
@@ -89,19 +89,20 @@ function App() {
             }),
         })
         .then((response) => response.json())
-        .then((data) => setUser({user_id: data.user_id,
-                            fname: data.fname,
-                            lname: data.lname,
-                            username: data.username,
-                            password: data.password
-        }
-      ));
+        .then(data => {
+            setUser({user_id: data.user_id,
+                    fname: data.fname,
+                    lname: data.lname,
+                    username: data.username,
+                    password: data.password})
+        });
     localStorage.setItem("loggedIn", true);   
     } else if (newUser.status===401) {
         alert("An account already exists with that username. Please try again.");
         window.location.reload();
     }
   } 
+
 
   function setSession() {
       localStorage.setItem("userId", user.user_id);
@@ -112,8 +113,7 @@ function App() {
   }
 
 
-  let handleLogOut = async (evt) => {
-    evt.preventDefault();
+  let handleLogOut = (evt) => {
     setLoggedIn(false);
     localStorage.setItem("loggedIn", false);
     setUser({user_id: "",

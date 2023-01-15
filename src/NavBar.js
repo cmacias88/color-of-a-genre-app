@@ -14,7 +14,7 @@ function NavBar({loggedIn, handleLogOut, user}) {
                     <Link to='my-profile'>
                         Your Profile
                     </Link>
-                    <Link to={`/profile/${user.user_id}/visualizations`}>
+                    <Link to={`/profile/${user.user_id}`}>
                         Your Visualizations
                     </Link>
                     <Link to="/browse-visualizations">

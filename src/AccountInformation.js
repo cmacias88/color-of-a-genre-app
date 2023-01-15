@@ -12,7 +12,7 @@ const AccountInformation = ({user}) => {
                 Your Username: {user.username}
             </p>
             <p>
-                <Link to={`/profile/${user.user_id}/visualizations`}>Your Visualizations</Link>
+                <Link to={`/profile/${user.user_id}`}>Your Visualizations</Link>
             </p>
         </>
     )

@@ -1,37 +1,55 @@
-import React from 'react'
+import { React, useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom';
 
 function AllUserVisualizations() {
 
     let {user_id} = useParams();
 
-    let allVisualizationInfo = []
+    const [visualizations, setVisualizations] = useState([]);
 
-    let userVisualizations = fetch('/api/all-playlists')
-        .then(response => response.json())
-        .then(res => {
-            for(const item of res){
-                if (parseInt(JSON.stringify(item.user_id)) === user_id) {
-                    allVisualizationInfo.push({"playlist_id": parseInt(JSON.stringify(item.playlist_id)),
-                                            "playlist_name": JSON.stringify(item.playlist_name)})
-                }   
-            }
-        })
+    const getVisualizations = async () => {
+        try {
+            const response = await fetch('/api/all-playlists');
+            const data = await response.json();
+            for (const visualization of data)
+            if (parseInt(JSON.stringify(visualization.user_id)) === user_id) {
+                setVisualizations.push(visualization)
+            };
+            console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
+    };
+      
+    useEffect(() => {
+        getVisualizations();
+    }, []);
 
-    console.log(allVisualizationInfo)
-
-    return (
-        <div>
-            <h1>
-                Visualizations
-            </h1>
-            {allVisualizationInfo.map(visualization => (
-                <div>
-                    <Link to={`/visualization-generator/${visualization.playlist_id}`}>{visualization.playlist_name} Visualization</Link>
-                </div>
-            ))};
-        </div>
-    )
+    if (visualizations.length > 0) {
+        return (
+            <div>
+                <h1>
+                    Visualizations
+                </h1>
+                {visualizations.map(visualization => (
+                    <div>
+                        <Link to={`/visualization-generator/${visualization.playlist_id}`}>{visualization.playlist_name} Visualization</Link>
+                    </div>
+                ))}
+            </div>
+        )
+    } else {
+        return (            
+            <div>
+                <h1>
+                    Visualizations
+                </h1>
+                <p>
+                    It looks like you don't have any playlists currently saved!
+                </p>
+            </div>
+        )
+    }
 }
 
 export default AllUserVisualizations;
