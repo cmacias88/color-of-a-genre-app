@@ -27,7 +27,7 @@ function GenrePercentageVisualizer() {
                 genreNames.push(JSON.stringify(genreinfo.genre_name));
                 genrePercentages.push(parseFloat(JSON.stringify(genreinfo.percentage)))
                 genreColors.push({"genre_name": JSON.stringify(genreinfo.genre_name),
-                "most_common_color": JSON.stringify(genreinfo.most_common_color)});
+                                "most_common_color": JSON.stringify(genreinfo.most_common_color)});
             }
             console.log(genreNames)
             console.log(genrePercentages)
@@ -40,7 +40,7 @@ function GenrePercentageVisualizer() {
                 label: 'Genre Percentages',
                 data: genrePercentages,
                 borderColor: color,
-                backgroundColor: () => randomColor(genrePercentages.length),
+                backgroundColor: genreColors,
                 pointBackgroundColor: color,
             }
     
@@ -71,9 +71,11 @@ function GenrePercentageVisualizer() {
 
     const CardList = genreColors.map((genre) => {
         return(
-            <div style={{ backgroundColor: genre.most_common_color }} key={genre.genre_name} className="card">
+            <div style={{ backgroundColor: genre.most_common_color }} key={genre.genre_name} class="card">
                 <div class="card-body">
-                For this playlist, {genre.genre_name} is {genre.most_common_color}
+                    <p class="card-text">
+                        For this playlist, {genre.genre_name} is {genre.most_common_color}
+                    </p>
                 </div>
             </div>
         )
@@ -84,7 +86,7 @@ function GenrePercentageVisualizer() {
         <div style={{width: "50%", height:"50%", position: "relative"}}>
             <Doughnut data={data} options={options} />
         </div>
-        <div>
+        <div class="card-deck">
             {CardList}
         </div>
         </>

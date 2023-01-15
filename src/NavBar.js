@@ -1,75 +1,58 @@
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom';
 
 function NavBar({loggedIn, handleLogOut, user}) {
     
     if (loggedIn){
         return (
-            <Navbar class="navbar" sticky="top">
-                <Navbar.Toggle aria-controls="navbarScroll" />
-                <Navbar.Collapse id="navbarScroll">
-                <Nav>
-                    <Nav.Link href="/">
+            <nav class="navbar">
+                    <Link to="/">
                         Home
-                    </Nav.Link>
-                    <Nav.Link href="/about">
+                    </Link>
+                    <Link to="/about">
                         About
-                    </Nav.Link>
-                    <NavDropdown title="Your Profile" id="navbar-dropdown">
-                        <NavDropdown.Item href={`/my-profile`}>
-                            Account Information
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href={`/profile/${user.user_id}/visualizations`}>
-                            Your Visualizations
-                        </NavDropdown.Item>
-                    </NavDropdown>
-                    <Nav.Link href="/browse-visualizations">
+                    </Link>
+                    <Link to='my-profile'>
+                        Your Profile
+                    </Link>
+                    <Link to={`/profile/${user.user_id}/visualizations`}>
+                        Your Visualizations
+                    </Link>
+                    <Link to="/browse-visualizations">
                         Browse
-                    </Nav.Link>
-                    <Nav.Link href="/log-out"
-                                onClick={handleLogOut}
-                                id="log-out">
+                    </Link>
+                    <Link to="/log-out"
+                        onClick={handleLogOut}
+                        id="log-out"
+                    >
                         Sign Out
-                    </Nav.Link>
-                    <Nav.Link href="/submit-playlist">
+                    </Link>
+                    <Link to="/submit-playlist">
                         Create A Visualization
-                    </Nav.Link>
-                </Nav>
-                </Navbar.Collapse>
-            </Navbar>
+                    </Link>
+            </nav>
         );
     } else {
         return (
-            <Navbar class="navbar" sticky="top">
-                <Navbar.Toggle aria-controls="navbarScroll" />
-                <Navbar.Collapse id="navbarScroll">
-                <Nav>
-                    <Nav.Link href="/">
-                        Home
-                    </Nav.Link>
-                    <Nav.Link href="/about">
-                        About
-                    </Nav.Link>
-                    <Nav.Link href="/sign-up">
-                        Sign Up
-                    </Nav.Link>
-                    <Nav.Link href="/log-in">
-                        Log In
-                    </Nav.Link>
-                    <Nav.Link href="/about">
-                        About
-                    </Nav.Link>
-                    <Nav.Link href="/browse-visualizations">
-                        Browse
-                    </Nav.Link>
-                    <Nav.Link href="/submit-playlist">
-                        Create A Visualization
-                    </Nav.Link>
-                </Nav>
-                </Navbar.Collapse>
-            </Navbar>
+            <nav class="navbar">
+                <Link to="/">
+                    Home
+                </Link>
+                <Link to="/about">
+                    About
+                </Link>
+                <Link to="/sign-up">
+                    Sign Up
+                </Link>
+                <Link to="/log-in">
+                    Log In
+                </Link>
+                <Link to="/browse-visualizations">
+                    Browse
+                </Link>
+                <Link to="/submit-playlist">
+                    Create A Visualization
+                </Link>
+            </nav>
         ); 
     }
 };

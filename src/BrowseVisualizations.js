@@ -14,15 +14,13 @@ function BrowseVisualizations() {
         .then((data) => 
             setPlaylistData(data)
         )
-    }, [playlistData])
+    }, [])
 
-  // handle change event of search input
     const handleChange = value => {
         setSearchInput(value);
         filterData(value);
     };
 
-  // filter records by search text
     const filterData = (value) => {
     const lowercasedValue = value.toLowerCase().trim();
     if (lowercasedValue === "") setPlaylistData(playlistData);
@@ -50,7 +48,8 @@ function BrowseVisualizations() {
             {playlistData.map((d, i) => {
                 return <div key={d.playlist_id} className="box">
                 <b>Playlist name: </b>{d.playlist_name}<br />
-                <b>Link: </b><Link to={`/visualization-generator/${d.playlist_id}`}></Link><br />
+                <b>Link:</b> 
+                <Link to={`/visualization-generator/${d.playlist_id}`}>{d.playlist_name} Visualization</Link><br />
                 </div>
             })}
             <div className="clearboth"></div>

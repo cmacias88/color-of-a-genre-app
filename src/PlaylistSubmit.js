@@ -7,7 +7,6 @@ import { Navigate } from 'react-router'
 
 function PlaylistSubmit() {
 
-    const [validated, setValidated] = useState(false);
     let [playlist, setPlaylist] = useState('');
 
     let handlePlaylistSubmit = async (evt) => {
@@ -25,16 +24,16 @@ function PlaylistSubmit() {
             .then((response) => response.json())
             .then((data) => {
                 console.log('Success:', data);
-                return <Navigate to={`/visualization-generator/${data.playlist_id}`}/>
+                // return <Navigate to={`/visualization-generator/${data.playlist_id}`}/>
             })
     }
 
     return(
         <div>
             <h1>Submit Your Playlist</h1>
-            <Form noValidate validated={validated} onSubmit={handlePlaylistSubmit} className="forms">
+            <Form onSubmit={handlePlaylistSubmit} className="forms">
                 <Form.Group className="mb-1" controlId="formPlaylistLink">
-                    <Form.Label name="playlist_link">Playlist Link</Form.Label>
+                    <Form.Label name="playlist">Playlist Link</Form.Label>
                     <Form.Control type="text" placeholder="Enter a Spotify playlist (Link, URI, ID)." onChange={(evt) => setPlaylist(evt.target.value)} required />
                     <Form.Control.Feedback type="invalid">
                         Please provide a valid Spotify playlist.

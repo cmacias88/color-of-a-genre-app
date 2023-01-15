@@ -163,7 +163,7 @@ function App() {
                   />} 
               />
               <Route path='/my-profile' element={<AccountInformation user={user}/> } />
-              <Route path={"/profile/:user_id/visualizations"} element={<AllUserVisualizations user={user}/>} />
+              <Route path={"/profile/:user_id"} element={<AllUserVisualizations />} />
               <Route path='/submit-playlist' element={<PlaylistSubmit /> } />
               <Route path={"/visualization-generator/:playlist_id"} element ={<GenrePercentageVisualizer loggedIn={loggedIn}
                                                                                                             user={user}/>}
