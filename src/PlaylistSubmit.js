@@ -2,6 +2,7 @@ import { useState } from "react";
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router'
 
 
 function PlaylistSubmit() {
@@ -9,20 +10,24 @@ function PlaylistSubmit() {
     const [validated, setValidated] = useState(false);
     let [playlist, setPlaylist] = useState('');
 
-
     let handlePlaylistSubmit = async (evt) => {
         evt.preventDefault();
-        await fetch("/api/submit-playlist", {
+        fetch("/api/submit-playlist", {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-          },
+            },
             body: JSON.stringify({
-                playlist: "Valid",
-          }),
-      });
-    };
+                playlist: "Valid", 
+            })
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                return <Navigate to={`/visualization-generator/${data.playlist_id}`}/>
+            })
+    }
 
     return(
         <div>

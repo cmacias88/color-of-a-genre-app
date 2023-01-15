@@ -109,7 +109,7 @@ function App() {
           <Routes>
               <Route path ='/' element = {<Home />}/>
               <Route path ='/about' element = {<About />}/>
-              <Route path='/sign-up' element ={loggedIn ? <Navigate to='/my-profile' /> :
+              <Route path='/sign-up' element = {loggedIn ? <Navigate to='/my-profile' /> :
                   <UserSignUp
                       setFname={(evt) => setUser({ ...user, fname: evt.target.value })}
                       setLname={(evt) => setUser({ ...user, lname: evt.target.value })}
@@ -124,7 +124,7 @@ function App() {
                   />} 
               />
               <Route path='/my-profile' element={<AccountInformation user={user}/> } />
-              <Route path={`/profile/${user.user_id}/visualizations`} element={<AllUserVisualizations user={user}/>} />
+              <Route path={`/profile/:user_id/visualizations`} element={<AllUserVisualizations />} />
               <Route path='/submit-playlist' element={<PlaylistSubmit /> } />
               <Route path={"/visualization-generator/:playlist_id"} element ={<><GenrePercentageVisualizer loggedIn={loggedIn}
                                                                                                             user={user}/>

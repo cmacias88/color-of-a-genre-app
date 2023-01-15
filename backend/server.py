@@ -98,8 +98,8 @@ def make_playlist():
     user_playlist = sp.playlist(playlist)
 
     if user_playlist:
-        playlist_name = user_playlist['items']['name']
-        playlist_uri : user_playlist['items']['uri'] 
+        playlist_name = user_playlist['name']
+        playlist_uri = user_playlist['uri'] 
         if session["user"]:
             user_id = session["user"]
         db_playlist = crud.create_playlist(playlist_uri, playlist_name, user_id)
@@ -186,8 +186,10 @@ def make_playlist():
                                 "track_image_color": db_track.track_image_color,
                                 "track_genre": genre.genre_name})
 
-        # return jsonify({'playlist_id': playlist_id})
-        return redirect(f"/visualization-generator/{playlist_id}")
+        return jsonify({'playlist_id': playlist_id,
+                        'playlist_name': playlist_name, 
+                        'playlist_uri': playlist_uri,
+                        "user_id": user_id})
     else: 
         return jsonify({'error': "Playlist submission is not valid."})
 

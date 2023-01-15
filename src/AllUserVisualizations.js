@@ -21,7 +21,7 @@ function AllUserVisualizations() {
             </h1>
             {allVisualizationInfo.map((visualization) => (
                 <h2 key={visualization.playlist_id}> 
-                <Link to={`/visualization-generator/:playlist_id}`}>{visualization.playlist_name} Visualization</Link></h2>
+                <Link to={`/visualization-generator/${visualization.playlist_id}`}>{visualization.playlist_name} Visualization</Link></h2>
             ))};
         </div>
     )

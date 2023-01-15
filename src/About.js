@@ -7,14 +7,16 @@ const About = () => {
       <>
         <h1>About</h1>
         <p>
-            This site was inspired by personalized visualization generators like Spotify Wrapped!
+            This site was inspired by personalized visualization generators like Spotify Wrapped 
+            and uses the python libraries spotipy and colorthief.
         </p>
         <p>
-            In order to begin creating your visualization, use a valid and <em>public</em> Spotify playlist link, URI, or ID. 
+            In order to begin creating your visualization, use a valid and <em>public</em> 
+            and single owner Spotify playlist link, URI, or ID. 
             Here are some examples of each:
-                <li>Spotify Playlist Link: https://open.spotify.com/playlist/7fiod3XXqprAJkisV5vfqF?si=51d4ed7684c248b6</li>
-                <li>Spotify Playlist URI: spotify:playlist:7fiod3XXqprAJkisV5vfqF</li> 
-                <li>Spotify Playlist ID: 7fiod3XXqprAJkisV5vfqF</li>
+                <li>Spotify Playlist Link: https://open.spotify.com/playlist/37i9dQZF1DX5hol82XuK24?si=f75641dddc014608</li>
+                <li>Spotify Playlist URI: spotify:playlist:0BUaDCMU85oa6iirnC4TFG</li> 
+                <li>Spotify Playlist ID: 0BUaDCMU85oa6iirnC4TFG</li>
         </p>
         <p>
             After copying this format, submit it at <Link to="/submit-playlist">our playlist submitter</Link> to get your Color of A Genre visualization.
