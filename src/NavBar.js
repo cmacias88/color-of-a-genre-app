@@ -1,4 +1,3 @@
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -8,7 +7,6 @@ function NavBar({loggedIn, handleLogOut, user}) {
     if (loggedIn){
         return (
             <Navbar class="navbar" sticky="top">
-                <Container fluid>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                 <Nav>
@@ -40,40 +38,37 @@ function NavBar({loggedIn, handleLogOut, user}) {
                     </Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
-            </Container>
             </Navbar>
         );
     } else {
         return (
             <Navbar class="navbar" sticky="top">
-                <Container fluid>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                    <Nav>
-                        <Nav.Link href="/">
-                            Home
-                        </Nav.Link>
-                        <Nav.Link href="/about">
-                            About
-                        </Nav.Link>
-                        <Nav.Link href="/sign-up">
-                            Sign Up
-                        </Nav.Link>
-                        <Nav.Link href="/log-in">
-                            Log In
-                        </Nav.Link>
-                        <Nav.Link href="/about">
-                            About
-                        </Nav.Link>
-                        <Nav.Link href="/browse-visualizations">
-                            Browse
-                        </Nav.Link>
-                        <Nav.Link href="/submit-playlist">
-                            Create A Visualization
-                        </Nav.Link>
-                    </Nav>
-                    </Navbar.Collapse>
-                </Container>
+                <Navbar.Toggle aria-controls="navbarScroll" />
+                <Navbar.Collapse id="navbarScroll">
+                <Nav>
+                    <Nav.Link href="/">
+                        Home
+                    </Nav.Link>
+                    <Nav.Link href="/about">
+                        About
+                    </Nav.Link>
+                    <Nav.Link href="/sign-up">
+                        Sign Up
+                    </Nav.Link>
+                    <Nav.Link href="/log-in">
+                        Log In
+                    </Nav.Link>
+                    <Nav.Link href="/about">
+                        About
+                    </Nav.Link>
+                    <Nav.Link href="/browse-visualizations">
+                        Browse
+                    </Nav.Link>
+                    <Nav.Link href="/submit-playlist">
+                        Create A Visualization
+                    </Nav.Link>
+                </Nav>
+                </Navbar.Collapse>
             </Navbar>
         ); 
     }

@@ -19,18 +19,17 @@ function GenreMostCommonColors() {
           console.log(genreColors)
     });
 
-    const renderCard = (card, index) => {
-        return (
-          <Card style={{ backgroundColor: card.most_common_color }} key={index} className="box">
-            <Card.Body>
-              <Card.Title>{card.genre_name}</Card.Title>
-              <Card.Text>For this playlist, {card.genre_name} is {card.most_common_color}</Card.Text>
-            </Card.Body>
-          </Card>
-        );
-      };
+  return (
+    genreColors.map(genre =>
+        <Card style={{ backgroundColor: genre.most_common_color }} key={genre.genre_name} className="card">
+          <Card.Body>
+            <Card.Title>{genre.genre_name}</Card.Title>
+            <Card.Text>For this playlist, {genre.genre_name} is {genre.most_common_color}</Card.Text>
+          </Card.Body>
+        </Card>
+    )
+  );
     
-    return <div className="grid">{genreColors.map(renderCard)}</div>;
 }
 
 export default GenreMostCommonColors;
