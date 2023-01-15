@@ -11,11 +11,12 @@ function GenreMostCommonColors() {
     const playlistVisualizationData = fetch(`/api/visualization-generator/${playlist_id}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            console.log(data.playlist_genres)
             for(const genreInfo of data.playlist_genres){
-                genreColors.push({"genre_name": genreInfo.genre,
-                                "most_common_color": genreInfo.genre.most_common_color});
+                genreColors.push({"genre_name": JSON.stringify(genreInfo.genre_name),
+                                  "most_common_color": JSON.stringify(genreInfo.most_common_color)});
             }
+          console.log(genreColors)
     });
 
     const renderCard = (card, index) => {

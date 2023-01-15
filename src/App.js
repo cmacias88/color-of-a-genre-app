@@ -59,14 +59,52 @@ function App() {
                                 password: data.password
           }
         ));
-        setLoggedIn(true);
-        localStorage.setItem("loggedIn", true);
+      localStorage.setItem("loggedIn", true);
 
     } else if (userExists.status===401){
         alert(userExists.statusText);
     }
   };
 
+  const handleSignIn = async (evt) => {
+    let newUser = await fetch('/api/sign-up', { 
+        method: "POST",
+        headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+        body: JSON.stringify(user),
+    });
+    if(newUser.status===200){
+        fetch("/api/sign-up", {
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+              fname: user.fname,
+              lname: user.lname,
+              username: user.username,
+              password: user.password
+            }),
+        })
+        .then((response) => response.json())
+        .then((data) => setUser({user_id: data.user_id,
+                            fname: data.fname,
+                            lname: data.lname,
+                            username: data.username,
+                            password: data.password
+        }
+      ));
+    localStorage.setItem("loggedIn", true);   
+    } else if (newUser.status===401) {
+        alert("An account already exists with that username. Please try again.");
+        window.location.reload();
+    }
+  } 
+
+  
   function setSession() {
       localStorage.setItem("userId", user.user_id);
       localStorage.setItem("userFname", user.fname);
@@ -74,6 +112,7 @@ function App() {
       localStorage.setItem("userUsername", user.username);
       localStorage.setItem("userPassword", user.password);
   }
+
 
   let handleLogOut = async (evt) => {
     evt.preventDefault();
@@ -98,7 +137,8 @@ function App() {
     }
   }, []);
 
-  Promise.all([handleLogIn, setSession()]);
+
+  Promise.all([handleSignIn, handleLogIn, setSession()]);
 
 
   return (
@@ -111,11 +151,11 @@ function App() {
               <Route path ='/' element = {<Home />}/>
               <Route path ='/about' element = {<About />}/>
               <Route path='/sign-up' element = {loggedIn ? <Navigate to='/my-profile' /> :
-                  <UserSignUp
+                  <UserSignUp handleSignIn={handleSignIn}
                       setFname={(evt) => setUser({ ...user, fname: evt.target.value })}
                       setLname={(evt) => setUser({ ...user, lname: evt.target.value })}
                       setUsername={(evt) => setUser({ ...user, username: evt.target.value })}
-                      setPassword={(evt) => setUser({ ...user, password: evt.target.value })}
+                      setPassword={(evt) => setUser({ ...user, password: evt.target.value })} 
                   />} 
               />
               <Route path='/log-in' element={loggedIn ? <Navigate to='/my-profile' />:

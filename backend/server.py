@@ -30,16 +30,16 @@ def make_user_account():
     password = request.json.get('password')
 
     if crud.get_user_by_username(username, password) == None:
-        user_account = crud.create_user(fname=fname,
+        user = crud.create_user(fname=fname,
                                         lname=lname,
                                         username=username,
                                         password=password)
-        db.session.add(user_account)
+        db.session.add(user)
         db.session.commit()
-        session['user'] = user_account
+        session['user'] = user
         return jsonify({
-                "id": user_account.user_id,
-                "username": user_account.username
+                "id": user.user_id,
+                "username": user.username
             })
     else:
         return jsonify({'error': 'Sorry, that username is already being used. Please try again.' })
@@ -91,7 +91,8 @@ def make_playlist():
         playlist_name = user_playlist['name']
         playlist_uri = user_playlist['uri'] 
         if session["user"]:
-            user_id = session["user"]
+            user = session["user"]
+            user_id = user.user_id
         db_playlist = crud.create_playlist(playlist_uri, playlist_name, user_id)
 
         db.session.add(db_playlist)
@@ -227,10 +228,10 @@ def make_visualization_data(playlist_id):
                     genre_most_common_color.append((color, color_total))
             genre_most_common_color = color
             genre_percentage = ((values['count'])/total_track_num) * 100
-            playlist_genre_info.append({genre: {
+            playlist_genre_info.append({"genre_name": genre,
                                         "percentage": genre_percentage,
                                         "most_common_color": genre_most_common_color}
-                                        })      
+                                        )      
 
             visualization_data = crud.create_visualization_data(genre_percentage, genre_most_common_color, genre)
             db.session.add(visualization_data)

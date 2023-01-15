@@ -20,11 +20,13 @@ function GenrePercentageVisualizer() {
     const playlistVisualizationData = fetch(`/api/visualization-generator/${playlist_id}`)
         .then(response => response.json())
         .then(res => {
-            console.log(res)
-            for(const genreinfo of res){
-                genreNames.push(genreinfo.genre);
-                genrePercentages.push(parseFloat(genreinfo.genre.percentage));
+            console.log(res.playlist_genres)
+            for (const genreinfo of res.playlist_genres){
+                genreNames.push(JSON.stringify(genreinfo.genre_name));
+                genrePercentages.push(parseFloat(JSON.stringify(genreinfo.percentage)));
             }
+            console.log(genreNames)
+            console.log(genrePercentages)
         });
 
     const data = {
@@ -34,7 +36,7 @@ function GenrePercentageVisualizer() {
                 label: 'Genre Percentages',
                 data: genrePercentages,
                 borderColor: color,
-                backgroundColor: color(genrePercentages.length),
+                backgroundColor: () => randomColor(genrePercentages.length),
                 pointBackgroundColor: color,
             }
     
