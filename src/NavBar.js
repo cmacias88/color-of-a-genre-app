@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function NavBar({loggedIn, handleLogout, user}) {
+function NavBar({loggedIn, handleLogOut, user}) {
     
     if (loggedIn){
         return (
@@ -31,7 +31,7 @@ function NavBar({loggedIn, handleLogout, user}) {
                         Browse
                     </Nav.Link>
                     <Nav.Link href="/log-out"
-                                onClick={handleLogout}
+                                onClick={handleLogOut}
                                 id="log-out">
                         Sign Out
                     </Nav.Link>

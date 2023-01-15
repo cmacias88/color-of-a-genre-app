@@ -12,7 +12,7 @@ function PlaylistSubmit() {
 
     let handlePlaylistSubmit = async (evt) => {
         evt.preventDefault();
-        fetch("/api/submit-playlist", {
+        await fetch("/api/submit-playlist", {
             method: "POST",
             headers: {
                 'Accept': 'application/json',

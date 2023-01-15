@@ -11,8 +11,7 @@ const About = () => {
             and uses the python libraries spotipy and colorthief.
         </p>
         <p>
-            In order to begin creating your visualization, use a valid and <em>public</em> 
-            and single owner Spotify playlist link, URI, or ID. 
+            In order to begin creating your visualization, use a valid and <em>public</em>  and single owner Spotify playlist link, URI, or ID. 
             Here are some examples of each:
                 <li>Spotify Playlist Link: https://open.spotify.com/playlist/37i9dQZF1DX5hol82XuK24?si=f75641dddc014608</li>
                 <li>Spotify Playlist URI: spotify:playlist:0BUaDCMU85oa6iirnC4TFG</li> 

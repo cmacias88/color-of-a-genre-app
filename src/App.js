@@ -67,7 +67,6 @@ function App() {
     }
   };
 
-
   function setSession() {
       localStorage.setItem("userId", user.user_id);
       localStorage.setItem("userFname", user.fname);
@@ -76,12 +75,10 @@ function App() {
       localStorage.setItem("userPassword", user.password);
   }
 
-  Promise.all([handleLogIn, setSession()]);
-
   let handleLogOut = async (evt) => {
     evt.preventDefault();
     setLoggedIn(false);
-    localStorage.setItem("isLoggedIn", false);
+    localStorage.setItem("loggedIn", false);
     setUser({user_id: "",
             fname:"",
             lname:"",
@@ -90,6 +87,7 @@ function App() {
             setUser({});
     localStorage.removeItem('user');
   };
+  
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("loggedIn");
@@ -99,6 +97,9 @@ function App() {
       setLoggedIn(false);
     }
   }, []);
+
+  Promise.all([handleLogIn, setSession()]);
+
 
   return (
       <BrowserRouter>
@@ -124,7 +125,7 @@ function App() {
                   />} 
               />
               <Route path='/my-profile' element={<AccountInformation user={user}/> } />
-              <Route path={`/profile/:user_id/visualizations`} element={<AllUserVisualizations />} />
+              <Route path={"/profile/:user_id/visualizations"} element={<AllUserVisualizations user={user}/>} />
               <Route path='/submit-playlist' element={<PlaylistSubmit /> } />
               <Route path={"/visualization-generator/:playlist_id"} element ={<><GenrePercentageVisualizer loggedIn={loggedIn}
                                                                                                             user={user}/>
