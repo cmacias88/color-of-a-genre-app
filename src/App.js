@@ -24,8 +24,6 @@ function App() {
   let [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem("loggedIn")));
 
   let handleLogIn = async (evt) => {
-    evt.preventDefault();
-
     let userExists = await fetch("/api/log-in", {
         method: "POST",
         headers: {
@@ -52,14 +50,13 @@ function App() {
       })
         .then((response) => response.json())
         .then(data => {
+          localStorage.setItem("loggedIn", true);
           setUser({user_id: data.user_id,
                     fname: data.fname,
                     lname: data.lname,
                     username: data.username,
                     password: data.password})
         });
-      localStorage.setItem("loggedIn", true);
-
     } else if (userExists.status===401){
         alert(userExists.statusText);
     }
@@ -90,13 +87,13 @@ function App() {
         })
         .then((response) => response.json())
         .then(data => {
-            setUser({user_id: data.user_id,
+            setUser({user_id: +(data.user_id),
                     fname: data.fname,
                     lname: data.lname,
                     username: data.username,
                     password: data.password})
         });
-    localStorage.setItem("loggedIn", true);   
+        localStorage.setItem("loggedIn", true);   
     } else if (newUser.status===401) {
         alert("An account already exists with that username. Please try again.");
         window.location.reload();

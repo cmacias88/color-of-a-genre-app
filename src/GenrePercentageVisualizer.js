@@ -16,14 +16,16 @@ function GenrePercentageVisualizer() {
     let genrePercentages = [];
     let genreColors = [];
 
+    const [visualizationData, setVisualizationData] = useState([]);
+
     const {playlist_id} = useParams();
 
-    const playlistVisualizationData = 
-        fetch(`/api/visualization-generator/${playlist_id}`)
-        .then(response => response.json())
-        .then(res => {
-            console.log(res.playlist_genres)
-            for (const genreinfo of res.playlist_genres){
+    const playlistVisualizationData = async() => {
+        const response = await fetch(`/api/visualization-generator/${playlist_id}`)
+        const data = await response.json()
+        setVisualizationData(data.playlist_genres)
+        console.log(data.playlist_genres)
+            for (const genreinfo of data.playlist_genres){
                 genreNames.push(JSON.stringify(genreinfo.genre_name));
                 genrePercentages.push(parseFloat(JSON.stringify(genreinfo.percentage)))
                 genreColors.push(JSON.stringify(genreinfo.most_common_color));
@@ -31,7 +33,7 @@ function GenrePercentageVisualizer() {
             console.log(genreNames)
             console.log(genrePercentages)
             console.log(genreColors)
-    });
+    };
 
     const data = {
         labels: genreNames,
@@ -40,7 +42,7 @@ function GenrePercentageVisualizer() {
                 label: 'Genre Percentage',
                 data: genrePercentages,
                 borderColor: color,
-                backgroundColor: genreColors,
+                backgroundColor: () => randomColor(),
                 pointBackgroundColor: color,
             }
     
@@ -81,14 +83,22 @@ function GenrePercentageVisualizer() {
         )
     })
 
+    useEffect(() => {
+        playlistVisualizationData();
+    }, []);
+
     return (
         <>
         <div>
             <Doughnut data={data} options={options} />
         </div>
-        <div class="card-deck">
-            {CardList}
-        </div>
+        {visualizationData.map(visualization => (
+                <div key={visualization.genre_name}>
+                    <li>
+                        For you, {visualization.genre_name} is {visualization.most_common_color}.
+                    </li>
+                </div>
+        ))}
         </>
     );
 
