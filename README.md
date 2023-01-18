@@ -8,7 +8,7 @@ Python, JavaScript, React, Flask, SQLAlchemy (PostGreSQL), HTML and CSS
 #### User Accounts (Sign Up and Login)
 
 #### Personalized User Profile 
-Give access to previous 
+Give access to previous visualizations created with a user account while loggged in. 
 
 #### About Instructional Page 
 
@@ -17,21 +17,22 @@ Give access to previous
 #### Create a Playlist Genre Visualization
 
 # Prerequisites
-A Client ID and Client Secret is needed to gain access to the Internet Game Database. To create an account, follow the directions in https://api-docs.igdb.com/#about.
+A Client ID and Client Secret is needed to gain access to the Spotify Web API and by extension, the spotipy python library. To create an account, follow the directions in https://developer.spotify.com/documentation/general/guides/authorization/.
 
 Once an account is created, move on to set-up.
 
 # Setup
 
-Create a secrets.sh file containing:
+Create a secrets.sh file containing the following:
 
 ```
+
 export CLIENT_ID="your CLIENT ID"
 export CLIENT_SECRET="your CLIENT SECRET"
 
 ```
 
-Start a virtual environment
+Start a virtual environment.
 
 ```
 
@@ -48,15 +49,16 @@ source secrets.sh
 
 ```
 
-Install requirements
+Install the documented requirements. 
 
 ```
+
 cd backend/
 pip3 install -r requirements.txt
 
 ```
 
-Seed database
+Seed the database.
 
 ```
 
@@ -68,7 +70,9 @@ python3 seed_database.py
 
 #### Open two terminals
 Start a virtual environment and install project dependencies.
+
 ```
+
 virtualenv env
 source env/bin/activate
 cd backend/
@@ -79,19 +83,21 @@ pip3 install -r requirements.txt
 Go to web app root directory.
 
 ```
+
 cd ~/src/color-of-a-genre-app
 
 ```
 
-Start Flask server on one terminal
+Start Flask server first in one terminal.
 
 ```
+
 python3 server.py
 
 ```
 
 
-Start react-app on the other terminal
+Start React app in the other terminal.
 
 ```
 yarn start
