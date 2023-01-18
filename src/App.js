@@ -24,6 +24,7 @@ function App() {
   let [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem("loggedIn")));
 
   let handleLogIn = async (evt) => {
+    evt.preventDefault();
     let userExists = await fetch("/api/log-in", {
         method: "POST",
         headers: {
@@ -35,7 +36,6 @@ function App() {
             password: user.password
         }),
     });
-
     if(userExists.status===200){
       fetch("/api/log-in", {
         method: "POST",
@@ -45,24 +45,25 @@ function App() {
           },
         body: JSON.stringify({
           username: user.username,
-          password: user.password
-          }),
+          password: user.password}),
       })
         .then((response) => response.json())
-        .then(data => {
+        .then((data) => {
           localStorage.setItem("loggedIn", true);
           setUser({user_id: data.user_id,
                     fname: data.fname,
                     lname: data.lname,
                     username: data.username,
                     password: data.password})
-        });
+        }
+      );
     } else if (userExists.status===401){
         alert(userExists.statusText);
     }
   };
 
   const handleSignIn = (evt) => {
+    evt.preventDefault();
     let newUser = fetch('/api/sign-up', { 
         method: "POST",
         headers: { 
@@ -82,13 +83,12 @@ function App() {
               fname: user.fname,
               lname: user.lname,
               username: user.username,
-              password: user.password
-            }),
+              password: user.password}),
         })
         .then((response) => response.json())
-        .then(data => {
+        .then((data) => {
             setUser({user_id: +(data.user_id),
-                    fname: data.fname,
+                    fname: user.fname,
                     lname: data.lname,
                     username: data.username,
                     password: data.password})

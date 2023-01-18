@@ -19,8 +19,9 @@ function PlaylistSubmit() {
             })
         })
         .then((response) => response.json())
-            .then((data) => {
-                console.log('Success:', data);
+            .then(data => {
+                console.log(data)
+                setPlaylist(data)
             })
 
     return(
