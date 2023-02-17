@@ -8,7 +8,7 @@ Python, JavaScript, React, Flask, SQLAlchemy (PostGreSQL), HTML and CSS
 #### User Accounts (Sign Up and Login)
 
 #### Personalized User Profile 
-Give access to previous visualizations created with a user account while loggged in. 
+Give access to previous visualizations created with a user account while logged in. 
 
 #### About Instructional Page 
 

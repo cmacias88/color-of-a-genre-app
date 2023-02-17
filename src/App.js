@@ -16,13 +16,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'; import './App.css';
 function App() {  
 
   let [user, setUser] = useState({user_id: Number(localStorage.getItem("userId")),
-                                      fname: localStorage.getItem("userFname"),
-                                      lname: localStorage.getItem("userLname"),
-                                      username: localStorage.getItem("userUsername"),
-                                      password: localStorage.getItem("userPassword")});
+                                  fname: localStorage.getItem("userFname"),
+                                  lname: localStorage.getItem("userLname"),
+                                  username: localStorage.getItem("userUsername"),
+                                  password: localStorage.getItem("userPassword")});
 
   let [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem("loggedIn")));
 
+  
   let handleLogIn = async (evt) => {
     evt.preventDefault();
     let userExists = await fetch("/api/log-in", {
@@ -49,22 +50,24 @@ function App() {
       })
         .then((response) => response.json())
         .then((data) => {
+          setLoggedIn(true);
           localStorage.setItem("loggedIn", true);
           setUser({user_id: data.user_id,
                     fname: data.fname,
                     lname: data.lname,
                     username: data.username,
                     password: data.password})
-        }
-      );
+          });
+          console.log(user);
     } else if (userExists.status===401){
         alert(userExists.statusText);
+        window.location.reload();
     }
   };
 
-  const handleSignIn = (evt) => {
+  const handleSignIn = async (evt) => {
     evt.preventDefault();
-    let newUser = fetch('/api/sign-up', { 
+    let newUser = await fetch('/api/sign-up', { 
         method: "POST",
         headers: { 
             'Accept': 'application/json',
@@ -87,13 +90,15 @@ function App() {
         })
         .then((response) => response.json())
         .then((data) => {
-            setUser({user_id: +(data.user_id),
-                    fname: user.fname,
-                    lname: data.lname,
-                    username: data.username,
-                    password: data.password})
-        });
-        localStorage.setItem("loggedIn", true);   
+          setLoggedIn(true);
+          localStorage.setItem("loggedIn", true);
+          setUser({user_id: data.user_id,
+                  fname: data.fname,
+                  lname: data.lname,
+                  username: data.username,
+                  password: data.password})
+          });
+          console.log(user);  
     } else if (newUser.status===401) {
         alert("An account already exists with that username. Please try again.");
         window.location.reload();
@@ -108,6 +113,9 @@ function App() {
       localStorage.setItem("userUsername", user.username);
       localStorage.setItem("userPassword", user.password);
   }
+
+  
+  Promise.all([handleSignIn, setSession()]);
 
 
   let handleLogOut = (evt) => {
@@ -133,9 +141,6 @@ function App() {
   }, []);
 
 
-  Promise.all([handleSignIn, handleLogIn, setSession()]);
-
-
   return (
       <BrowserRouter>
           <NavBar loggedIn={loggedIn} 
@@ -153,10 +158,10 @@ function App() {
                       setPassword={(evt) => setUser({ ...user, password: evt.target.value })} 
                   />} 
               />
-              <Route path='/log-in' element={loggedIn ? <Navigate to='/my-profile' />:
+              <Route path='/log-in' element = {loggedIn ? <Navigate to='/my-profile' />:
                   <UserLogIn handleLogIn={handleLogIn}
-                  setUsername={(evt) => setUser({ ...user, username: evt.target.value })}
-                  setPassword={(evt) => setUser({ ...user, password: evt.target.value })} 
+                    setUsername={(evt) => setUser({ ...user, username: evt.target.value })}
+                    setPassword={(evt) => setUser({ ...user, password: evt.target.value })} 
                   />} 
               />
               <Route path='/my-profile' element={<AccountInformation user={user}/> } />

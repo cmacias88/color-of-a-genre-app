@@ -26,14 +26,21 @@ def make_user_account():
     lname = request.json.get('lname')
     username = request.json.get('username')
     password = request.json.get('password')
+    
+    get_user = crud.get_user_by_username(username, password)
 
-    if crud.get_user_by_username(username, password) == None:
+    if get_user:
+        return jsonify({'error': 'Sorry, that username is already being used. Please try again.'}), 401
+    else:
         user = crud.create_user(fname=fname,
-                                        lname=lname,
-                                        username=username,
-                                        password=password)
+                                lname=lname,
+                                username=username,
+                                password=password)
         db.session.add(user)
         db.session.commit()
+        print('******************')
+        print(user)
+        print('******************')
         session['user_id'] = user.user_id
         return jsonify({
                 "user_id": user.user_id,
@@ -41,9 +48,7 @@ def make_user_account():
                 "lname": user.lname,
                 "username": user.username,
                 "password": user.password
-            })
-    else:
-        return jsonify({'error': 'Sorry, that username is already being used. Please try again.' })
+        })
     
 
 @app.route('/api/log-in', methods=['POST'])
